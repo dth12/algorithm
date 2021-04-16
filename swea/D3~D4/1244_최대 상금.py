@@ -1,7 +1,3 @@
-import sys
-sys.stdin = open("input.txt", "r")
-
-
 def mix(repeat):
     global MAX
     if repeat == K:
