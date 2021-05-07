@@ -1,5 +1,4 @@
 def solution(key, lock):
-    # 완전히 감쌀 수 있는 초대형 list 생성
     N = len(lock)
     M = len(key)
     stack = []
