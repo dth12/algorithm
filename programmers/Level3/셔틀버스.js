@@ -1,7 +1,6 @@
 // n회 t분 간격, 최대 m명
 // 모든 버스를 못타게 됐을 때: 마지막 버스, 마지막 사람보다 1분 먼저.
 // 마지막 버스가 비어있을 때: 마지막 버스 도착 시간에 탐.
-// 마지막 버스는 꽉 차있지만, 나머지 버스는 탈 수 있을 때, 마지막부터 보면서 가장 처음으로 탈 수 있는 
 function numToTime(num) {
     let hour = String(Math.floor(num / 60))
     let minute = String(num % 60)
