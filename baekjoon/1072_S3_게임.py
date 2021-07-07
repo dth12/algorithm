@@ -1,3 +1,6 @@
+'''
+    실수 계산 꼭 신경쓰자.
+'''
 X, Y = map(int, input().split())
 Z = Y * 100 // X
 answer = -1
