@@ -1,52 +1,55 @@
 import sys
 input = sys.stdin.readline
 
-T = list(input().strip())
-P = list(input().strip())
-KMP = [0 for _ in range(len(P))]
-for i in range(1, len(P)):
-    if P[i - 1] == P[KMP[i - 1]]:
-        KMP[i] = KMP[i - 1] + 1
-    else:
-        KMP[i] = KMP[i - 1]
 
+def KMP_init() -> None:
+    i = 0
+    j = 1
+    while j < len(P):
+        if P[i] == P[j]:
+            i += 1
+            KMP[j] = i
+        else:
+            while i > 0 and P[i] != P[j]:
+                i = KMP[i - 1]
+
+            if P[i] == P[j]:
+                i += 1
+                KMP[j] = i
+
+        j += 1
+
+
+T = list(input()) # target
+P = list(input()) # pattern
 answer = 0
-flag = 0
-start_T = 0
-start_P = 0
+pos = []
+KMP = [0 for _ in range(len(P))]
+KMP_init()
 
-while True:
-    if start_T >= len(T) - len(P):
-        break
+i = 0
+j = 0
+while j < len(T):
+    if P[i] == T[j]:
+        i += 1
+    else:
+        while i > 0 and P[i] != T[j]:
+            i = KMP[i - 1]
 
-    for i in range(start_P, len(P)):
-        if T[start_T + i] != P[i]:
-            if KMP[i]:
-                if i - KMP[i]:
-                    start_T += i - KMP[i]
-                else:
-                    start_T += 1
-                start_P = KMP[i]
-            else:
-                start_T += i + 1
-                start_P = 0
-            flag = 1
-            break
+        if P[i] == T[j]:
+            i += 1
 
-    if flag:
-        flag = 0
-        continue
+    if i == len(P):
+        pos.append(j + 2 - len(P))
+        answer += 1
+        i = KMP[-1]
 
-    answer += 1
-    start_P = KMP[-1]
-    start_T += len(P) - KMP[-1]
-
+    j += 1
 
 print(answer)
-'''
-ABCDABCDABDE
-ABCDABD
-            A B C D A B D
-    
-    1 1 1 1 1 2 3
-'''
+print(*pos)
+
+
+
+
+
