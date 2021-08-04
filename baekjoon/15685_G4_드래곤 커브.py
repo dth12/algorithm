@@ -10,7 +10,7 @@ def make_dragon_curve(cnt: int, path: list, gen: int) -> None:
     }
 
     L = len(path)
-    last = path[-1]
+    last = path[-1] # 붙여되는 지점
     for i in range(L - 1, 0, -1):
         # 가장 마지막 지점에서 방향을 구함
         cr = path[i - 1][0] - path[i][0]
