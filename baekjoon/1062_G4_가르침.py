@@ -13,7 +13,6 @@ for word in word_list:
         if char not in learned:
             alpha.add(char)
 
-
 if K <= 4:
     print(0)
 elif K == 5:
