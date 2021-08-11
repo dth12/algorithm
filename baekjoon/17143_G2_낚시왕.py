@@ -1,5 +1,6 @@
 import sys
-sys.stdin = open('input.txt', 'r')
+input = sys.stdin.readline
+
 
 def inrange(r: int, c: int) -> bool:
    return 0 <= r < R and 0 <= c < C
@@ -21,29 +22,23 @@ def go_shark(direction: int, velocity: int, row: int, col: int, n: int) -> list:
                 new_direction = 3 if new_direction == 4 else 4
 
     sharks[n][3] = new_direction
-    return [r, c, n]
+    return [r, c]
 
 
 def shark_move() -> list:
     new_board = [[-1 for _ in range(C)] for _ in range(R)]
-    new_shark_pos = []
     for r in range(R):
         for c in range(C):
             if board[r][c] >= 0:
                 n = board[r][c]
                 direction = sharks[n][3]
                 velocity = sharks[n][2]
-                new_pos = go_shark(direction, velocity, r, c, n)
-                new_shark_pos.append(new_pos)
-
-    for i in range(len(new_shark_pos)):
-        r, c, n = new_shark_pos[i]
-        if new_board[r][c] == -1:
-            new_board[r][c] = n
-        else:
-            m = new_board[r][c]
-            if sharks[m][4] < sharks[n][4]:
-                new_board[r][c] = n
+                nr, nc = go_shark(direction, velocity, r, c, n)
+                if new_board[nr][nc] == -1:
+                    new_board[nr][nc] = n
+                else:
+                    if sharks[new_board[nr][nc]][4] < sharks[n][4]:
+                        new_board[nr][nc] = n
 
     return new_board
 
@@ -56,6 +51,7 @@ def fishing(c: int) -> int:
             return sharks[shark_num][4]
 
     return 0
+
 
 # r c 속력 이동방향 크기
 # 1 위, 2 아래, 3 오른쪽, 4 왼쪽
