@@ -1,12 +1,12 @@
 import sys
 input = sys.stdin.readline
 
+
 def dijkstra() -> int:
     dist = [INF for _ in range(N + 1)]
     visited = [0 for _ in range(N + 1)]
     dist[start] = 0
     for _ in range(N):
-
         min_val = INF
         min_idx = -1
         for i in range(1, N + 1):

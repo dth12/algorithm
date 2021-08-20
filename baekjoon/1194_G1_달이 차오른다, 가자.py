@@ -30,16 +30,12 @@ def visit(r: int, c: int, keys: list) -> None:
 def bfs(start: list) -> int:
     Q = deque([[start[0], start[1], []]]) # 좌표와 갖고 있는 key를 체크.
     visit(start[0], start[1], [])
-
     dist = -1
     while Q:
         dist += 1
         L = len(Q)
         for _ in range(L):
             r, c, keys = Q.popleft()
-            if r == 0 and c == 0:
-                debug = True
-
             if board[r][c] == '1':
                 return dist
 
@@ -47,6 +43,7 @@ def bfs(start: list) -> int:
                 nr = r + dr[i]
                 nc = c + dc[i]
                 if possible_to_go(nr, nc, keys):
+                    # a b c =>
                     if 97 <= ord(board[nr][nc]) <= 122:
                         new_keys = keys[:]
                         if board[nr][nc].upper() not in new_keys:
@@ -60,14 +57,12 @@ def bfs(start: list) -> int:
     return -1
 
 
-# 65 <= upper <= 90
-# 97 <= lower <= 122
 R, C = map(int, input().split())
 board = [list(input()) for _ in range(R)]
 dr = [1, -1, 0, 0]
 dc = [0, 0, 1, -1]
 
-visited = [[[0 for _ in range((2**7)-1)] for _ in range(C)] for _ in range(R)]
+visited = [[[0 for _ in range(2**7)] for _ in range(C)] for _ in range(R)]
 start = []
 
 for r in range(R):
