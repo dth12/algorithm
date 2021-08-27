@@ -1,6 +1,7 @@
 from heapq import heappush, heappop
 import sys
-input = sys.stdin.readline
+input = sys.stdin.readline # 30만개 => 인풋 => 시간초과
+
 
 def dijk() -> int:
     dist = [INF for _ in range(N + 1)]
@@ -19,7 +20,7 @@ def dijk() -> int:
                 dist[w] = new_cost
                 path[w] = path[v]
             elif dist[w] == new_cost:
-                path[w] = (path[w] + path[v]) % 1000000009
+                path[w] = (path[w] + path[v]) % 1000000009 # 메모리 초과
 
     return path[E]
 
@@ -34,4 +35,3 @@ for _ in range(M):
     graph[end].append([cost, start])
 
 print(dijk() % 1000000009)
-
