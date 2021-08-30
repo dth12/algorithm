@@ -1,6 +1,7 @@
 import sys
 sys.stdin = open("input.txt", "r")
 
+
 def dfs(cnt, idx):
     global MIN
 
