@@ -21,14 +21,15 @@ def is_path(row: int, col: int, i: int) -> int:
             cnt = 0
             nr = r
             nc = c
-            while inrange(nr, nc) and cnt < L and [r, c] != wall:
+            while inrange(nr, nc) and cnt < L:
                 nr -= dr[i]
                 nc -= dc[i]
-                if inrange(nr, nc) and board[nr][nc] == h:
+                if inrange(nr, nc) and board[nr][nc] == h and [nr, nc] != wall:
                     cnt += 1
+                else:
+                    return 0
 
             if cnt == L:
-                up = L
                 h += 1
             else:
                 return 0
@@ -68,10 +69,6 @@ for r in range(N):
             for i in range(2):
                 if not inrange(r + dr[i], c + dc[i]):
                     continue
-                if r == 0 and c == 2:
-                    debug = True
                 answer += is_path(r, c, i)
-                if is_path(r, c, i):
-                    print(r, c, i)
 
 print(answer)
