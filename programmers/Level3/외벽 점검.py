@@ -15,7 +15,7 @@ def inrange(distance: int, cur_pos: int, target: int, n: int, clockwise: bool) -
             return True
         else:
             return False
-        
+
     return False
 
 
@@ -36,28 +36,37 @@ def dfs(n: int, idx: int, weaks: list, dist: list, visited: list) -> None:
         return
 
     for i in range(len(weaks)):
-        new_left_visited = [ele for ele in visited]
-        new_right_visited = [ele for ele in visited]
-
+        temp = []
         for j in range(len(weaks)):  # 시계 방향
-            if inrange(dist[idx], weaks[i], weaks[j], n, True):
-                new_left_visited[j] = 1
+            if not visited[j] and inrange(dist[idx], weaks[i], weaks[j], n, True):
+                visited[j] = 1
+                temp.append(j)
 
-            if inrange(dist[idx], weaks[i], weaks[j], n, False):
-                new_right_visited[j] = 1
+        if len(temp) > 0:
+            dfs(n, idx + 1, weaks, dist, visited)
+            for k in temp:
+                visited[k] = 0
 
-        dfs(n, idx + 1, weaks, dist, new_left_visited)
-        dfs(n, idx + 1, weaks, dist, new_right_visited)
+        temp = []
+        for j in range(len(weaks)):
+            if not visited[j] and inrange(dist[idx], weaks[i], weaks[j], n, False):
+                visited[j] = 1
+                temp.append(j)
+
+        if len(temp) > 0:
+            dfs(n, idx + 1, weaks, dist, visited)
+            for k in temp:
+                visited[k] = 0
 
 
 def solution(n, weaks, dist) -> int:
     global answer
-    dist = dist[::-1]
+    dist = sorted(dist)[::-1]
     visited = [0 for _ in range(len(weaks))]
 
     dfs(n, 0, weaks, dist, visited)
 
+    if answer == 9:
+        return -1
+
     return answer
-
-
-print(solution(12, [1, 5, 6, 10], [1, 2, 3, 4]))
