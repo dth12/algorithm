@@ -1,6 +1,7 @@
 import sys
 input = sys.stdin.readline
 
+
 def inrange(r: int, c: int) -> bool:
     return 0 <= r < N and 0 <= c < N
 
@@ -10,8 +11,8 @@ def tornado(r: int, c: int, o: int, cur_sand: int) -> int:
     ratio = [[0.01], [0.07, 0.02], [0.1]]
     spread = 0
     disappear = 0
-    o1 = (o + 3) % 4
-    o2 = (o + 1) % 4
+    o1 = (o + 3) % 4 # 아래
+    o2 = (o + 1) % 4 # 위
 
     for i in range(3):
         for j in range(1, move[i] + 1):
