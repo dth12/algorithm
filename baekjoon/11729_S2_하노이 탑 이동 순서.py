@@ -1,4 +1,4 @@
-def solve(start:int, mid: int, end: int, cnt: int ):
+def solve(start: int, mid: int, end: int, cnt: int):
     if cnt == 1:
         order.append([start, end])
         return
