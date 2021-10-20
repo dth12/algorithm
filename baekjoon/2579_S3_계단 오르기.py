@@ -1,6 +1,8 @@
 def dfs(cnt: int, repeat: int, total: int):
     global max_val
 
+    # DP => [0, 0, 0, 0] => 1칸 홀수일 때는 => 2칸
+
     if cnt == N - 1 and repeat == 1:
         return
 
@@ -27,6 +29,6 @@ N = int(input())
 stair = [int(input()) for _ in range(N)]
 stair = [0] + stair
 max_val = 0
-memo = [[0 for _ in range(2)] for _ in range(N + 1)]
+memo = [[0 for _ in range(2)] for _ in range(N + 1)] # 5층 => 1번을 2번 4 => 5층 3 => 5층
 dfs(0, 0, 0)
 print(max_val)

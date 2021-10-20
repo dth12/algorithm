@@ -1,3 +1,8 @@
+'''
+    일단 더하고,
+    before => 이전 숫자 저장 후.
+    이전의 숫자와 현재 숫자를 비교 후 분기처리.
+'''
 def rome_to_number(rome_num: str) -> int:
     flag = 0
     num = 0
@@ -43,6 +48,7 @@ num = rome_to_number(rome_num_1) + rome_to_number(rome_num_2)
 temp = num
 answer = ''
 idx = 3
+
 while temp:
     q = temp // (10 ** idx)
     temp -= q * (10 ** idx)
